@@ -2,159 +2,99 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Handwriting Recognition - Hamza Sajjad</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-    
+  <title>Image to Text For Names</title>
+<style>
     body {
-      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #00416A, #E4E5E6);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #333;
+        font-family: 'Georgia', serif;
+        background-color: #f4f4f4;
+        color: #000;
+        margin: 0;
+        padding: 2rem;
     }
-    
+
     .container {
-      background: rgba(255, 255, 255, 0.97);
-      padding: 2.5rem;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      width: 90%;
-      max-width: 600px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+        background-color: #ffffff;
+        padding: 2rem;
+        border: 1px solid #ccc;
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: left;
     }
 
     .author-name {
-      font-size: 1.2rem;
-      color: #00416A;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      padding: 0.5rem 1rem;
-      border-radius: 30px;
-      background: linear-gradient(to right, rgba(0, 65, 106, 0.1), rgba(228, 229, 230, 0.3));
-      display: inline-block;
+        font-size: 1rem;
+        font-style: italic;
+        color: #555;
+        margin-bottom: 1rem;
     }
 
     h1 {
-      color: #00416A;
-      margin: 1rem 0 2rem 0;
-      font-size: 2.4rem;
-      font-weight: 600;
-      position: relative;
-      display: inline-block;
-    }
-
-    h1::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      height: 3px;
-      background: linear-gradient(to right, #00416A, #E4E5E6);
-      border-radius: 2px;
-    }
-
-    .error-message {
-      background-color: #fee;
-      color: #c00;
-      padding: 1rem;
-      border-radius: 8px;
-      margin: 1rem 0;
-      font-size: 0.9rem;
-    }
-
-    .info-message {
-      background-color: #e3f2fd;
-      color: #1565c0;
-      padding: 1rem;
-      border-radius: 8px;
-      margin: 1rem 0;
-      font-size: 0.9rem;
+        font-size: 1.8rem;
+        color: #000080;
+        border-bottom: 2px solid #000080;
+        padding-bottom: 0.3rem;
     }
 
     form {
-      margin: 2.5rem 0;
-      position: relative;
+        margin-top: 2rem;
     }
 
     input[type="file"] {
-      background: rgba(0, 65, 106, 0.05);
-      padding: 1.2rem;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 300px;
-      margin-bottom: 1.5rem;
-      border: 2px dashed rgba(0, 65, 106, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    input[type="file"]:hover {
-      border-color: #00416A;
-      background: rgba(0, 65, 106, 0.08);
+        border: 1px solid #ccc;
+        padding: 0.5rem;
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 1rem;
     }
 
     button {
-      background: linear-gradient(135deg, #00416A, #005f99);
-      color: white;
-      border: none;
-      padding: 14px 35px;
-      border-radius: 30px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 65, 106, 0.2);
+        padding: 0.5rem 1rem;
+        background-color: #000080;
+        color: white;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
     }
 
     button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0, 65, 106, 0.3);
-      background: linear-gradient(135deg, #005f99, #00416A);
+        background-color: #000060;
     }
 
-    .preview {
-      max-width: 300px;
-      margin-top: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .preview:hover {
-      transform: scale(1.02);
+    .error-message,
+    .info-message {
+        padding: 0.5rem;
+        background-color: #fdd;
+        border: 1px solid #c00;
+        margin: 1rem 0;
+        color: #900;
     }
 
     .result {
-      background: linear-gradient(to right, rgba(0, 65, 106, 0.05), rgba(228, 229, 230, 0.1));
-      padding: 2rem;
-      border-radius: 15px;
-      margin-top: 2rem;
-      border: 1px solid rgba(0, 65, 106, 0.1);
+        border-top: 1px solid #ccc;
+        margin-top: 2rem;
+        padding-top: 1rem;
     }
 
     .result p {
-      margin: 0.7rem 0;
-      font-size: 1.15rem;
-      color: #2c3e50;
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .preview {
+        margin-top: 1rem;
+        border: 1px solid #aaa;
+        max-width: 100%;
     }
 
     strong {
-      color: #00416A;
-      font-weight: 600;
+        color: #000;
     }
-  </style>
+</style>
 </head>
 <body>
   <div class="container">
-    <div class="author-name">Hamza Sajjad</div>
-    <h1>✍️ Handwriting Recognition</h1>
+    <div class="author-name">reiyanami</div>
+    <h1>Image to Text</h1>
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -177,7 +117,6 @@
       <div class="result">
         <h2>Result</h2>
         <p><strong>Predicted Class:</strong> {{ prediction }}</p>
-        <p><strong>Confidence:</strong> {{ confidence }}</p>
         {% if filename %}
           <img src="{{ url_for('static', filename='uploads/' + filename) }}" class="preview" alt="Uploaded image">
         {% endif %}
